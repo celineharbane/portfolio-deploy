@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Céline Harbane | Développeur Fullstack</title>
+    <meta name="description" content="Développeur Web & Chef de Projet spécialisée e-commerce. WordPress, Shopify, WooCommerce. Création de modules sur mesure et solutions pour vos défis techniques.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { 'sans': ['Inter', 'system-ui'], 'mono': ['Fira Code', 'monospace'] } } }
+        }
+    </script>
+    
+    <style>
+        * { font-family: 'Inter', system-ui, sans-serif; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+        
+        :root { --bg: #ffffff; --bg-secondary: #f8fafc; --text: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --accent: #0f172a; }
+        .dark { --bg: #030712; --bg-secondary: #0f172a; --text: #f8fafc; --text-muted: #94a3b8; --border: #1e293b; --accent: #3b82f6; }
+        body { background: var(--bg); color: var(--text); }
+        
+        /* Smooth reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Float animation */
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-delay { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        
+        /* Code typing */
+        .code-line { opacity: 0; animation: code-appear 0.5s forwards; }
+        @keyframes code-appear { to { opacity: 1; } }
+        
+        /* Cursor blink */
+        .cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        
+        /* Chart bars */
+        .chart-bar { transform: scaleY(0); transform-origin: bottom; animation: chart-grow 1s ease-out forwards; }
+        @keyframes chart-grow { to { transform: scaleY(1); } }
+        
+        /* Progress animate */
+        .progress-animate { width: 0; animation: progress-fill 1.5s ease-out forwards; }
+        @keyframes progress-fill { to { width: var(--progress); } }
+        
+        /* Pulse dot */
+        .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        
+        /* Cards */
+        .card { background: var(--bg); border: 1px solid var(--border); transition: all 0.4s ease; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .dark .card:hover { box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.15); }
+        
+        /* Tech logos */
+        .tech-logo { transition: all 0.3s; filter: grayscale(100%); opacity: 0.5; }
+        .tech-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.15); }
+        
+        /* Progress bars */
+        .progress-track { background: var(--border); }
+        .progress-bar { background: var(--accent); }
+        .dark .progress-bar { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        
+        /* Glow */
+        .glow { box-shadow: 0 0 60px rgba(59, 130, 246, 0.1); }
+        .dark .glow { box-shadow: 0 0 80px rgba(59, 130, 246, 0.2); }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+        ::selection { background: var(--accent); color: white; }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#030712]/80 backdrop-blur-xl border-b border-transparent">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="#hero" class="font-mono font-semibold text-lg">
+                    <span class="text-neutral-400 dark:text-blue-500">&lt;</span>Céline<span class="text-neutral-400 dark:text-blue-500">/&gt;</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm text-neutral-500 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors">about</a>
+                    <a href="#skills" class="text-sm text-neutral-500 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors">stack</a>
+                    <a href="#projects" class="text-sm text-neutral-500 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors">projets</a>
+                    <a href="#experience" class="text-sm text-neutral-500 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors">parcours</a>
+                    <a href="#contact" class="text-sm px-4 py-2 bg-black dark:bg-blue-600 text-white rounded-lg hover:bg-neutral-800 dark:hover:bg-blue-500 transition-all">contact</a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" class="p-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800">
+                        <svg class="w-5 h-5 hidden dark:block text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        <svg class="w-5 h-5 block dark:hidden text-neutral-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-slate-800">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-200 dark:border-slate-800 bg-white dark:bg-[#030712]">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#about" class="block py-2">about</a>
+                <a href="#skills" class="block py-2">stack</a>
+                <a href="#projects" class="block py-2">projets</a>
+                <a href="#experience" class="block py-2">parcours</a>
+                <a href="#contact" class="block py-2">contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center pt-16 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Text -->
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+                        <span class="text-sm font-medium text-emerald-700 dark:text-emerald-400">Disponible pour missions</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+                        Développeur<br>
+                        <span class="text-neutral-400 dark:text-slate-500">Fullstack</span><br>
+                        <span class="dark:text-blue-400">Freelance</span>
+                    </h1>
+                    
+                    <p class="text-lg text-neutral-600 dark:text-slate-400 mb-8 max-w-md">
+                        <strong class="text-black dark:text-white">Développeur Web & Chef de Projet</strong> spécialisée e-commerce. 
+                        Je crée des modules sur mesure et trouve des solutions pour vos défis techniques.
+                    </p>
+                    
+                    <div class="flex gap-10 mb-10">
+                        <div>
+                            <div class="text-3xl font-bold font-mono dark:text-blue-400">15+</div>
+                            <div class="text-sm text-neutral-500">ans exp.</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold font-mono dark:text-blue-400">100+</div>
+                            <div class="text-sm text-neutral-500">projets</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold font-mono dark:text-blue-400">4.79</div>
+                            <div class="text-sm text-neutral-500">rating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 bg-black dark:bg-blue-600 text-white font-medium rounded-lg hover:bg-neutral-800 dark:hover:bg-blue-500 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                            Voir projets
+                        </a>
+                        <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-300 dark:border-slate-700 font-medium rounded-lg hover:border-black dark:hover:border-blue-500 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            Contact
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- MacBook with Code & Dashboard -->
+                <div class="hidden lg:block reveal" style="transition-delay: 0.3s;">
+                    <div class="relative">
+                        <div class="relative float">
+                            <!-- Screen -->
+                            <div class="bg-gray-800 rounded-t-xl p-2 shadow-2xl glow">
+                                <div class="bg-[#1a1a2e] rounded-lg overflow-hidden">
+                                    <!-- Browser Header -->
+                                    <div class="bg-[#16162a] px-4 py-2 flex items-center gap-2">
+                                        <div class="flex gap-1.5">
+                                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                        </div>
+                                        <div class="flex-1 mx-4">
+                                            <div class="bg-[#0d0d14] rounded px-3 py-1 text-xs text-slate-500 font-mono">~/ecommerce-dashboard</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Split: Code + Dashboard -->
+                                    <div class="flex h-64">
+                                        <!-- Code -->
+                                        <div class="w-1/2 p-4 border-r border-slate-700/50 font-mono text-xs text-slate-300">
+                                            <div class="code-line text-slate-500" style="animation-delay: 0.5s">// analytics.ts</div>
+                                            <div class="code-line mt-2" style="animation-delay: 0.8s"><span class="text-purple-400">const</span> <span class="text-blue-300">data</span> = {</div>
+                                            <div class="code-line" style="animation-delay: 1.1s">&nbsp;&nbsp;<span class="text-emerald-300">revenue</span>: <span class="text-amber-300">24580</span>,</div>
+                                            <div class="code-line" style="animation-delay: 1.4s">&nbsp;&nbsp;<span class="text-emerald-300">orders</span>: <span class="text-amber-300">156</span>,</div>
+                                            <div class="code-line" style="animation-delay: 1.7s">&nbsp;&nbsp;<span class="text-emerald-300">conversion</span>: <span class="text-amber-300">3.2</span>,</div>
+                                            <div class="code-line" style="animation-delay: 2s">&nbsp;&nbsp;<span class="text-emerald-300">growth</span>: <span class="text-emerald-400">+18.5</span></div>
+                                            <div class="code-line" style="animation-delay: 2.3s">};</div>
+                                            <div class="code-line mt-2" style="animation-delay: 2.6s"><span class="text-purple-400">export</span> data;<span class="cursor text-blue-400">|</span></div>
+                                        </div>
+                                        
+                                        <!-- Dashboard -->
+                                        <div class="w-1/2 p-3 bg-[#12121a]">
+                                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                                <div class="bg-[#1e1e2e] rounded p-2">
+                                                    <div class="text-[10px] text-slate-500">Revenue</div>
+                                                    <div class="text-sm font-bold text-emerald-400">€24,580</div>
+                                                </div>
+                                                <div class="bg-[#1e1e2e] rounded p-2">
+                                                    <div class="text-[10px] text-slate-500">Orders</div>
+                                                    <div class="text-sm font-bold text-blue-400">156</div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-[#1e1e2e] rounded p-2">
+                                                <div class="text-[10px] text-slate-500 mb-2">Performance</div>
+                                                <div class="flex items-end gap-1 h-16">
+                                                    <div class="chart-bar flex-1 bg-blue-500/60 rounded-t" style="height:40%; animation-delay:0.5s"></div>
+                                                    <div class="chart-bar flex-1 bg-blue-500/60 rounded-t" style="height:65%; animation-delay:0.6s"></div>
+                                                    <div class="chart-bar flex-1 bg-blue-500/60 rounded-t" style="height:45%; animation-delay:0.7s"></div>
+                                                    <div class="chart-bar flex-1 bg-blue-500/60 rounded-t" style="height:80%; animation-delay:0.8s"></div>
+                                                    <div class="chart-bar flex-1 bg-blue-500/60 rounded-t" style="height:60%; animation-delay:0.9s"></div>
+                                                    <div class="chart-bar flex-1 bg-blue-500/60 rounded-t" style="height:90%; animation-delay:1s"></div>
+                                                    <div class="chart-bar flex-1 bg-emerald-500 rounded-t" style="height:100%; animation-delay:1.1s"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 bg-[#1e1e2e] rounded p-2">
+                                                <div class="flex justify-between"><span class="text-[10px] text-slate-500">Conversion</span><span class="text-[10px] text-emerald-400">+18.5%</span></div>
+                                                <div class="mt-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full progress-animate" style="--progress:72%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MacBook Base -->
+                            <div class="bg-gray-300 dark:bg-gray-700 h-4 rounded-b-xl mx-8"></div>
+                            <div class="bg-gray-400 dark:bg-gray-600 h-2 rounded-b-lg mx-20"></div>
+                        </div>
+                        
+                        <!-- Floating badges -->
+                        <div class="absolute -top-4 -right-4 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full text-xs font-mono border shadow-lg float-delay flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>build: success
+                        </div>
+                        <div class="absolute -bottom-2 -left-4 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full text-xs font-mono border shadow-lg float flex items-center gap-2">
+                            <svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                            48 tests passed
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Logos -->
+    <section class="py-12 border-y border-neutral-200 dark:border-slate-800 bg-neutral-50/50 dark:bg-slate-900/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-center text-sm text-neutral-400 dark:text-slate-600 mb-8 font-mono">// Technologies & IA maîtrisées</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                <!-- WordPress -->
+                <div class="tech-logo" title="WordPress">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#21759b" d="M64.094 126.224c34.275-.052 62.021-27.933 62.021-62.325 0-33.574-26.689-60.909-59.894-62.105h-4.516C26.78 2.79.012 30.575.012 64.3c0 34.347 27.7 62.187 62.005 62.225l2.077-.301zm3.103-122.216 .206.205a60.03 60.03 0 0 1 15.071 2.158c4.838 1.873 9.244 4.377 13.218 7.516-1.128.048-2.197.069-3.056.104-5.326 0-9.129 3.055-8.908 7.896.206 4.401 2.57 8.131 5.732 12.533 2.438 3.444 5.254 7.862 5.254 14.26 0 4.434-1.32 9.97-3.922 16.636l-5.144 17.213-18.632-55.384c3.096-.147 5.89-.446 5.89-.446 2.773-.324 2.45-4.395-.324-4.25 0 0-8.318.668-13.69.668-5.072 0-13.6-.668-13.6-.668-2.772-.145-3.096 4.073-.325 4.25l5.428.446 8.088 22.108-11.363 34.042-18.925-56.146 3.099-.147c3.096-.147 5.89-.446 5.89-.446 2.772-.324 2.448-4.395-.325-4.25 0 0-7.078.604-12.477.665l.003-.004c7.637-11.851 20.82-19.79 35.864-20.097a.25.25 0 0 0-.023-.053l.033.053zm5.28 59.501 16.188 44.273c.088.24.208.446.318.666-5.127 2.573-10.809 4.062-16.811 4.36-.024-.002-.045-.002-.066-.005l-.013.005c-4.618-.183-9.042-1.046-13.18-2.45l13.564-46.849zm-48.99-16.53c0-6.006 1.066-11.762 3.006-17.118l24.73 67.741c-16.758-8.268-28.229-25.499-27.736-50.623zm97.242-.031c.068 16.651-6.721 31.14-17.31 41.378l.02-.033-15.066-43.478c3.942-6.783 5.001-12.21 5.001-17.109 0-1.752-.116-3.38-.336-4.9a58.093 58.093 0 0 1 15.206 13.619c5.422 6.934 9.487 15.233 11.986 24.167l.499-.013c-.056-4.703-.207-9.146-.588-13.478l.588-.153z"/></svg>
+                </div>
+                <!-- Shopify -->
+                <div class="tech-logo" title="Shopify">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#95bf46" d="M110.12 25.93a.75.75 0 0 0-.68-.56c-.28-.02-6.2-.14-6.2-.14s-4.1-4.1-4.58-4.58c-.46-.46-1.36-.32-1.72-.22-.04.02-.8.24-2.08.66-1.24-3.56-3.42-6.82-7.26-6.82-.1 0-.22 0-.32.02-.98-1.3-2.2-1.88-3.24-1.88-8 0-11.82 10-13.02 15.1-3.12.96-5.34 1.64-5.62 1.74-1.74.54-1.8.6-2.02 2.24-.18 1.24-4.74 36.46-4.74 36.46l38.04 7.14 20.68-4.46s-6.44-44.28-6.44-44.7zM85.88 17.75l-2.64.82c.02-.18.02-.36.02-.56 0-1.7-.24-3.08-.62-4.22 1.54.18 2.56 1.96 3.24 3.96zm-5.58-3.48c.42 1.18.68 2.86.68 5.16v.28l-6.86 2.12c1.32-5.08 3.8-7.54 6.18-7.56zm-2.74-1.92c.4 0 .82.14 1.2.4-2.96 1.38-6.12 4.88-7.46 11.86l-5.44 1.68c1.52-5.14 5.12-13.94 11.7-13.94z"/><path fill="#5e8e3e" d="m103.24 25.37-6.2-.14s-4.1-4.1-4.58-4.58c-.18-.18-.4-.26-.64-.3l-3.32 67.66 20.68-4.46s-6.44-44.26-6.44-44.68a.75.75 0 0 0-.68-.56l-.8.06z"/><path fill="#fff" d="m79.98 43.01-2.9 10.84s-2.54-1.36-5.64-1.36c-4.56 0-4.78 2.86-4.78 3.58 0 3.94 10.26 5.44 10.26 14.66 0 7.26-4.6 11.92-10.8 11.92-7.44 0-11.24-4.64-11.24-4.64l2-6.58s3.92 3.36 7.22 3.36c2.16 0 3.04-1.7 3.04-2.94 0-5.14-8.42-5.36-8.42-13.8 0-7.1 5.1-13.98 15.4-13.98 3.96 0 5.86 1.14 5.86 1.14v-2.2z"/></svg>
+                </div>
+                <!-- WooCommerce -->
+                <div class="tech-logo" title="WooCommerce">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#7f54b3" d="M116.3 89.1c-3.2 11.3-12.6 19.3-24 20.4-7.4.7-14.8.6-22.2.2-12.1-.7-23.7-3.5-34.3-9.5-1.4-.8-2.7-1.7-4.2-2.6 8.6 1 16.9.7 25.2-.5 8.5-1.2 16.5-3.8 23.8-8.4 7.2-4.5 12.7-10.7 16.3-18.3 2.5-5.2 3.9-10.7 4.8-16.4.3-1.8.4-3.6.6-5.6 4.2 4.1 7.4 8.8 9.5 14.2 3.3 8.6 4 17.4 4.5 26.5zm-96.7 7c-4-3.1-6.4-7.2-7.9-11.8-2.7-8.3-3-16.8-2.3-25.5.5-6.7 2-13.1 5.3-19 3.5-6.4 8.4-11.4 15-14.5 8-3.8 16.3-4.7 25-3.1 6.5 1.2 12 4.3 16.5 9 5.5 5.8 8.6 12.8 10 20.5.8 4.3 1.1 8.7 1 13.1-.2 5.7-1.2 11.2-3.4 16.5-3.6 8.7-9.5 15.1-18 19-7 3.2-14.5 4-22.2 3.2-7.2-.8-13.7-3.4-19-8.4zm19.8-48c-.8 2.2-1.6 4.3-2.4 6.4-1.6 4.2-3.2 8.3-4.7 12.5-.5 1.5-1.2 2.1-2.8 2-1.7-.2-2.5-1-2.9-2.5-.8-3.2-1.6-6.4-2.4-9.5-.5-2.1-.9-4.2-1.5-6.3-.2-.7-.5-1.4-1.5-1.3-.9.1-1.2.8-1.4 1.5-.5 1.7-.9 3.5-1.3 5.2-.9 3.9-1.7 7.8-2.7 11.6-.4 1.4-1 2.4-2.7 2.3-1.5-.1-2.4-.7-2.7-2.2-.4-1.8-.8-3.5-1.1-5.3-1.3-7.1-2.5-14.3-3.8-21.4-.2-1.3.3-2.3 1.5-2.6 1.4-.4 2.9-.1 3.4 1.4.7 2 1.2 4.1 1.6 6.2.8 4 1.5 8 2.3 12.1.5-.2.6-.6.7-1 1.1-4.7 2.1-9.4 3.3-14.1.4-1.5 1.3-2.4 2.9-2.4 1.7 0 2.5.9 3 2.5.9 3.2 1.7 6.5 2.6 9.7.3 1 .5 2 1.1 3.1.2-.4.3-.6.4-.9 1.3-4.5 2.6-8.9 3.8-13.4.4-1.5 1.2-2.4 2.8-2.4 1.1 0 2.1.2 2.6 1.3.4.8.1 1.7-.1 2.5-1.1 3.7-2.2 7.4-3.4 11.1zm28.7 3.3c-.2 3.9-1 7.4-3.6 10.4-1.8 2.1-4 3.4-6.8 3.6-2.5.2-4.4-.9-5.5-3.2-1.5-3.2-1.6-6.5-1-9.9.6-3.7 2-7 4.9-9.4 2.1-1.7 4.5-2.4 7.2-1.7 3 .7 4.6 2.6 5 5.6.2 1.5.1 3 .1 4.6h-.3zm-8.1-6.7c-1.3.3-2.3 1-3 2-1.4 2-2 4.2-2 6.6 0 1.3.2 2.5.7 3.7.5 1.1 1.3 1.6 2.4 1.5 1.2-.1 2.2-.6 2.9-1.5 1.6-2.2 2.1-4.8 2-7.4 0-1.1-.2-2.1-.7-3.1-.4-.8-1.1-1.4-2.3-1.8zm26.9 6.6c-.2 3.9-1 7.4-3.6 10.4-1.8 2.1-4 3.4-6.8 3.6-2.5.2-4.4-.9-5.5-3.2-1.5-3.2-1.6-6.5-1-9.9.6-3.7 2-7 4.9-9.4 2.1-1.7 4.5-2.4 7.2-1.7 3 .7 4.6 2.6 5 5.6.2 1.5.1 3 .1 4.6h-.3zm-8.1-6.7c-1.3.3-2.3 1-3 2-1.4 2-2 4.2-2 6.6 0 1.3.2 2.5.7 3.7.5 1.1 1.3 1.6 2.4 1.5 1.2-.1 2.2-.6 2.9-1.5 1.6-2.2 2.1-4.8 2-7.4 0-1.1-.2-2.1-.7-3.1-.4-.8-1.1-1.4-2.3-1.8z"/></svg>
+                </div>
+                <!-- React -->
+                <div class="tech-logo" title="React">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><g fill="#61DAFB"><circle cx="64" cy="64" r="11.4"/><path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9-15.6c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 13.8 4 22.1 10 22.1 15.6 0 4.7-5.8 9.7-15.7 13.4z"/></g></svg>
+                </div>
+                <!-- Node.js -->
+                <div class="tech-logo" title="Node.js">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#83CD29" d="M114 25L65.5 1.5c-2.1-1-4.4-1-6.4 0L11 25c-2.1 1-3.4 3.1-3.4 5.4v47.2c0 2.3 1.3 4.4 3.4 5.4l48.5 23.5c2.1 1 4.4 1 6.4 0L114 83c2.1-1 3.4-3.1 3.4-5.4V30.4c.1-2.3-1.2-4.4-3.4-5.4z"/><path fill="#3E863D" d="m65.5 1.5-49 23.5c-2.1 1-3.5 3.1-3.5 5.4v47.2c0 2.3 1.4 4.4 3.5 5.4l12.7 6.2c6.2 3.1 8.4 3.1 11.2 3.1 9.2 0 14.5-5.6 14.5-15.3V30.4c0-.5-.4-.9-.9-.9H46c-.5 0-.9.4-.9.9V77c0 4.3-4.5 8.6-11.8 5l-13.2-6.4c-.3-.2-.5-.5-.5-.9V30.4c0-.4.2-.7.5-.9l48.9-23.5c.3-.1.6-.1.9 0l48.9 23.5c.3.2.5.5.5.9v46.3c0 .4-.2.7-.5.9l-48.9 23.5c-.3.1-.6.1-.9 0l-12.5-6.1c-.2-.1-.5-.1-.7 0-3.5 1.7-4.1 2-7.4 3-.8.2-2 .6 .4 1.7l16.3 7.9c1 .5 2.2.8 3.4.8 1.1 0 2.3-.3 3.4-.8L114 83.1c2.1-1 3.4-3.1 3.4-5.4V30.4c.1-2.3-1.2-4.4-3.4-5.4z"/><path fill="#333" d="M79.8 56.1c-9.5 0-11.5 4.4-11.5 8.1 0 5.6 4.3 7.1 11.2 7.8 8.2.8 8.8 2 8.8 3.7 0 2.8-2.3 4-7.7 4-6.8 0-8.3-1.7-8.8-5.1 0-.4-.4-.7-.9-.7h-8c-.5 0-.9.4-.9.9.5 6.3 3.3 13.8 18.6 13.8 11.1 0 17.5-4.4 17.5-12.1 0-7.7-5.2-9.7-16.1-11.1-11-1.4-12.1-2.1-12.1-4.6 0-2.1.9-4.8 8.8-4.8 7 0 9.6 1.5 10.7 6.2.1.4.4.7.9.7h8c.2 0 .5-.1.7-.3.2-.2.3-.5.3-.7-.7-8.5-6.1-12.4-20.4-12.4z"/></svg>
+                </div>
+                <!-- TypeScript -->
+                <div class="tech-logo" title="TypeScript">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#007acc" d="M2 63.91v62.5h125v-125H2zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1A23 23 0 0180 109.19c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82.5 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H57.16v46.23H45.65V69.26H29.38v-5a49.19 49.19 0 01.14-5.16c.06-.08 10-.12 22-.1h21.81z"/></svg>
+                </div>
+                <!-- Tailwind -->
+                <div class="tech-logo" title="Tailwind CSS">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#38bdf8" d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64zm0 0"/></svg>
+                </div>
+                <!-- PHP -->
+                <div class="tech-logo" title="PHP">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#6181B6" d="M64 33.039C30.26 33.039 2.906 46.901 2.906 64S30.26 94.961 64 94.961 125.094 81.099 125.094 64 97.74 33.039 64 33.039zM48.103 70.032c-1.458 1.364-3.077 1.927-4.86 2.507-1.783.581-4.052.461-6.811.461h-6.253l-1.733 10h-7.301l6.515-34H41.7c4.224 0 7.305 1.215 9.242 3.432 1.937 2.217 2.519 5.364 1.747 9.337-.319 1.637-.856 3.159-1.614 4.515a15.118 15.118 0 01-2.972 3.748zM69.414 73l2.881-14.42c.328-1.688.208-2.942-.361-3.555-.57-.614-1.782-1.025-3.635-1.025h-5.79l-3.731 19h-7.244l6.515-33h7.244l-1.732 9h6.453c4.061 0 6.861.815 8.402 2.231s2.003 3.356 1.387 6.528L76.772 73h-7.358zm40.259-11.178c-.318 1.637-.856 3.133-1.613 4.488-.758 1.357-1.748 2.598-2.971 3.722-1.458 1.364-3.078 1.927-4.86 2.507-1.782.581-4.053.461-6.812.461h-6.253l-1.732 10h-7.301l6.514-34h14.041c4.224 0 7.305 1.215 9.241 3.432 1.935 2.217 2.518 5.418 1.746 9.39zM95.919 54h-5.001l-2.727 14h4.442c2.942 0 5.136-.29 6.576-1.4 1.442-1.108 2.413-2.828 2.918-5.421.484-2.491.264-4.434-.66-5.458-.925-1.024-2.774-1.721-5.548-1.721zm-56.985 0h-5.002l-2.727 14h4.441c2.943 0 5.136-.29 6.576-1.4 1.443-1.108 2.414-2.828 2.918-5.421.485-2.491.264-4.434-.66-5.458-.924-1.024-2.774-1.721-5.546-1.721z"/></svg>
+                </div>
+                <!-- Git -->
+                <div class="tech-logo" title="Git">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#F34F29" d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.333 3.264 58.123a8.133 8.133 0 000 11.5l55.117 55.114c3.174 3.174 8.32 3.174 11.499 0l54.858-54.858a8.135 8.135 0 00-.001-11.501z"/></svg>
+                </div>
+                <!-- Figma -->
+                <div class="tech-logo" title="Figma">
+                    <svg class="w-10 h-10" viewBox="0 0 128 128"><path fill="#0acf83" d="M45.5 129c11.9 0 21.5-9.6 21.5-21.5V86H45.5C33.6 86 24 95.6 24 107.5S33.6 129 45.5 129zm0 0"/><path fill="#a259ff" d="M24 64.5C24 52.6 33.6 43 45.5 43H67v43H45.5C33.6 86 24 76.4 24 64.5zm0 0"/><path fill="#f24e1e" d="M24 21.5C24 9.6 33.6 0 45.5 0H67v43H45.5C33.6 43 24 31.4 24 21.5zm0 0"/><path fill="#ff7262" d="M67 0h21.5C100.4 0 110 9.6 110 21.5S100.4 43 88.5 43H67zm0 0"/><path fill="#1abcfe" d="M110 64.5c0 11.9-9.6 21.5-21.5 21.5S67 76.4 67 64.5 76.6 43 88.5 43 110 52.6 110 64.5zm0 0"/></svg>
+                </div>
+                <!-- Claude AI (Anthropic) - Logo officiel starburst -->
+                <div class="tech-logo" title="Claude AI (Anthropic)">
+                    <svg class="w-10 h-10" viewBox="0 0 16 16" fill="#D97757">
+                        <path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029.098.44.024h1.077l2.005.15.525.346.315.424-.053.323-.807.411-3.631-.863-.872-.218h-.12v.073l.726.71 1.331 1.202 1.667 1.55.084.383-.214.302-.226-.032-1.464-1.101-.565-.497-1.28-1.077h-.084v.113l.295.432 1.557 2.34.08.718-.112.234-.404.141-.444-.08-.911-1.28-.94-1.44-.759-1.291-.093.053-.448 4.821-.21.246-.484.186-.403-.307-.214-.496.214-.98.258-1.28.21-1.016.19-1.263.112-.42-.008-.028-.092.012-.953 1.307-1.448 1.957-1.146 1.227-.274.109-.477-.247.045-.44.266-.39 1.586-2.018.956-1.25.617-.723-.004-.105h-.036l-4.212 2.736-.75.096-.324-.302.04-.496.154-.162 1.267-.871z"/>
+                    </svg>
+                </div>
+                <!-- ChatGPT (OpenAI) - Logo officiel -->
+                <div class="tech-logo" title="ChatGPT (OpenAI)">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08-4.778 2.758a.795.795 0 0 0-.393.681zm1.097-2.365 2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" fill="#10a37f"/>
+                    </svg>
+                </div>
+                <!-- Google Gemini - Logo officiel -->
+                <div class="tech-logo" title="Google AI Studio (Gemini)">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 24C12 24 12 12 24 12C12 12 12 0 12 0C12 0 12 12 0 12C12 12 12 24 12 24Z" fill="url(#gemini-gradient)"/>
+                        <defs>
+                            <linearGradient id="gemini-gradient" x1="0" y1="12" x2="24" y2="12" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#4285F4"/>
+                                <stop offset="0.5" stop-color="#9B72CB"/>
+                                <stop offset="1" stop-color="#D96570"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 dark:text-blue-400 mb-4">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        about()
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6 tracking-tight">
+                        Développeur Web<br><span class="text-neutral-400 dark:text-slate-500">& Chef de Projet</span>
+                    </h2>
+                    <div class="space-y-4 text-neutral-600 dark:text-slate-400">
+                        <p><strong class="text-black dark:text-white">Développeur Web</strong> spécialisée e-commerce (WordPress, Shopify, WooCommerce) et <strong class="text-black dark:text-white">Chef de Projet Web</strong> avec une solide expérience en gestion d'équipes et coordination technique.</p>
+                        <p>Je crée des <strong class="text-black dark:text-white">développements spécifiques</strong>, <strong class="text-black dark:text-white">plugins</strong> et <strong class="text-black dark:text-white">modules sur mesure</strong> qui apportent des solutions à vos défis e-commerce et boostent vos ventes.</p>
+                        <p>Mon atout : <strong class="text-black dark:text-white">15+ ans d'expérience commerciale</strong> (import/export, retail, immobilier) me permettent de comprendre vos enjeux business côté client.</p>
+                    </div>
+                </div>
+                <div class="reveal grid grid-cols-2 gap-4" style="transition-delay: 0.2s">
+                    <div class="card rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+                        </div>
+                        <h3 class="font-semibold mb-1">Développeur Web</h3>
+                        <p class="text-sm text-neutral-500">WordPress, Shopify, React</p>
+                    </div>
+                    <div class="card rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+                        </div>
+                        <h3 class="font-semibold mb-1">Modules sur mesure</h3>
+                        <p class="text-sm text-neutral-500">Plugins qui boostent vos ventes</p>
+                    </div>
+                    <div class="card rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+                        </div>
+                        <h3 class="font-semibold mb-1">Chef de Projet Web</h3>
+                        <p class="text-sm text-neutral-500">Coordination & gestion d'équipes</p>
+                    </div>
+                    <div class="card rounded-xl p-6">
+                        <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></svg>
+                        </div>
+                        <h3 class="font-semibold mb-1">E-commerce Expert</h3>
+                        <p class="text-sm text-neutral-500">Shopify, WooCommerce, PrestaShop</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-neutral-50/50 dark:bg-slate-900/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 dark:text-blue-400 mb-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+                    getSkills()
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Stack technique</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Frontend -->
+                <div class="card rounded-xl p-6 reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-slate-800 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Frontend</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div><div class="flex justify-between mb-2 text-sm"><span>WordPress & Plugins</span><span class="font-mono text-neutral-400">95%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:95%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>React/Next.js</span><span class="font-mono text-neutral-400">85%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:85%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>TypeScript</span><span class="font-mono text-neutral-400">80%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:80%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Modules sur mesure</span><span class="font-mono text-neutral-400">85%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:85%"></div></div></div>
+                    </div>
+                </div>
+                <!-- E-commerce -->
+                <div class="card rounded-xl p-6 reveal" style="transition-delay:0.1s">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-slate-800 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                        </div>
+                        <h3 class="font-semibold">E-commerce</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Shopify/Liquid</span><span class="font-mono text-neutral-400">95%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:95%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>WooCommerce</span><span class="font-mono text-neutral-400">95%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:95%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>PrestaShop</span><span class="font-mono text-neutral-400">85%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:85%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Stripe</span><span class="font-mono text-neutral-400">85%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:85%"></div></div></div>
+                    </div>
+                </div>
+                <!-- Backend -->
+                <div class="card rounded-xl p-6 reveal" style="transition-delay:0.2s">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-slate-800 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Backend & IA</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div><div class="flex justify-between mb-2 text-sm"><span>PHP/Laravel</span><span class="font-mono text-neutral-400">90%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:90%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Node.js</span><span class="font-mono text-neutral-400">80%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:80%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Claude / ChatGPT / Gemini</span><span class="font-mono text-neutral-400">85%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:85%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>REST APIs</span><span class="font-mono text-neutral-400">90%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:90%"></div></div></div>
+                    </div>
+                </div>
+                <!-- Tools -->
+                <div class="card rounded-xl p-6 reveal" style="transition-delay:0.3s">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-slate-800 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-neutral-700 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/></svg>
+                        </div>
+                        <h3 class="font-semibold">Outils</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Git/GitHub</span><span class="font-mono text-neutral-400">90%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:90%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Docker</span><span class="font-mono text-neutral-400">70%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:70%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Figma</span><span class="font-mono text-neutral-400">80%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:80%"></div></div></div>
+                        <div><div class="flex justify-between mb-2 text-sm"><span>Vercel</span><span class="font-mono text-neutral-400">85%</span></div><div class="h-1.5 progress-track rounded-full overflow-hidden"><div class="h-full progress-bar rounded-full" style="width:85%"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 dark:text-blue-400 mb-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"/></svg>
+                    projects.map()
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Projets récents</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project cards -->
+                <div class="card rounded-xl overflow-hidden reveal group">
+                    <div class="h-48 bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">GoFast</h3>
+                        <p class="text-sm text-neutral-600 dark:text-slate-400 mb-4">App jeûne intermittent avec coaching IA Claude API.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">React</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">Supabase</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl overflow-hidden reveal group" style="transition-delay:0.1s">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">AgencyFlow Pro</h3>
+                        <p class="text-sm text-neutral-600 dark:text-slate-400 mb-4">Dashboard gestion agence web complet.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">TypeScript</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">React</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">Node</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl overflow-hidden reveal group" style="transition-delay:0.2s">
+                    <div class="h-48 bg-gradient-to-br from-rose-400 to-pink-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">Germaine des Prés</h3>
+                        <p class="text-sm text-neutral-600 dark:text-slate-400 mb-4">Migration PrestaShop → Shopify. Lingerie éco-responsable.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">Shopify</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">Liquid</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl overflow-hidden reveal group" style="transition-delay:0.3s">
+                    <div class="h-48 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">Louis Gabriel Nouchi</h3>
+                        <p class="text-sm text-neutral-600 dark:text-slate-400 mb-4">E-commerce mode luxe. Migration complète.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">Shopify</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">Theme</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl overflow-hidden reveal group" style="transition-delay:0.4s">
+                    <div class="h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">ecom-utils</h3>
+                        <p class="text-sm text-neutral-600 dark:text-slate-400 mb-4">Librairie TypeScript utilitaires e-commerce.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">TypeScript</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">npm</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl overflow-hidden reveal group" style="transition-delay:0.5s">
+                    <div class="h-48 bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">ZenLoad</h3>
+                        <p class="text-sm text-neutral-600 dark:text-slate-400 mb-4">Concept SaaS - Assistant IA productivité.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">SaaS</span>
+                            <span class="px-2 py-1 bg-neutral-100 dark:bg-slate-800 rounded text-xs font-mono">AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 bg-neutral-50/50 dark:bg-slate-900/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 dark:text-blue-400 mb-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+                    git log --oneline
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Parcours</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Experience -->
+                <div class="reveal">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-lg bg-black dark:bg-blue-600 text-white flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+                        </div>
+                        <h3 class="font-semibold text-lg">Expérience</h3>
+                    </div>
+                    
+                    <div class="space-y-6 relative">
+                        <div class="absolute left-5 top-0 bottom-0 w-px bg-neutral-200 dark:bg-slate-800"></div>
+                        
+                        <div class="card rounded-xl p-6 ml-10 relative">
+                            <div class="absolute -left-[26px] w-3 h-3 rounded-full bg-black dark:bg-blue-500 border-4 border-white dark:border-[#030712]"></div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold">Développeur Fullstack Freelance</h4>
+                                <span class="text-xs font-mono text-neutral-400 bg-neutral-100 dark:bg-slate-800 px-2 py-1 rounded">2014-2017</span>
+                            </div>
+                            <p class="text-sm text-neutral-500 dark:text-blue-400 mb-3">Codeur.com • Sérifontaine</p>
+                            <p class="text-sm text-neutral-600 dark:text-slate-400">100+ projets, note 4.79/5. WordPress, Shopify, WooCommerce. Création de modules sur mesure.</p>
+                        </div>
+                        
+                        <div class="card rounded-xl p-6 ml-10 relative">
+                            <div class="absolute -left-[26px] w-3 h-3 rounded-full bg-neutral-300 dark:bg-slate-600 border-4 border-white dark:border-[#030712]"></div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold">Commerciale & Chef de Projet Web</h4>
+                                <span class="text-xs font-mono text-neutral-400 bg-neutral-100 dark:bg-slate-800 px-2 py-1 rounded">2018-2023</span>
+                            </div>
+                            <p class="text-sm text-neutral-500 dark:text-blue-400 mb-3">W6 Agency</p>
+                            <p class="text-sm text-neutral-600 dark:text-slate-400">Vente B2B, conseil stratégique digital, gestion de projets e-commerce. Vision business client.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formation -->
+                <div class="reveal" style="transition-delay:0.2s">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-lg bg-black dark:bg-blue-600 text-white flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+                        </div>
+                        <h3 class="font-semibold text-lg">Formation & Engagement</h3>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="card rounded-xl p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold">Diplôme Développeur Web & App</h4>
+                                <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded">2025</span>
+                            </div>
+                            <p class="text-sm text-neutral-500 dark:text-blue-400 mb-3">AFCI Beauvais • Diplôme reconnu par l'État</p>
+                            <p class="text-sm text-neutral-600 dark:text-slate-400">Reconversion vers le développement. Diplôme obtenu.</p>
+                        </div>
+                        
+                        <div class="card rounded-xl p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-semibold">Adjointe au Maire</h4>
+                                <span class="text-xs font-mono text-neutral-400 bg-neutral-100 dark:bg-slate-800 px-2 py-1 rounded">2020-now</span>
+                            </div>
+                            <p class="text-sm text-neutral-500 dark:text-blue-400 mb-3">Mairie de Sérifontaine</p>
+                            <p class="text-sm text-neutral-600 dark:text-slate-400">Affaires sociales et santé.</p>
+                        </div>
+                        
+                        <div class="card rounded-xl p-6">
+                            <h4 class="font-semibold mb-4">Mes atouts pour vous</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 border border-neutral-200 dark:border-slate-700 rounded-lg text-sm">Solutions e-commerce sur mesure</span>
+                                <span class="px-3 py-1.5 border border-neutral-200 dark:border-slate-700 rounded-lg text-sm">Modules qui boostent les ventes</span>
+                                <span class="px-3 py-1.5 border border-neutral-200 dark:border-slate-700 rounded-lg text-sm">Vision business client</span>
+                                <span class="px-3 py-1.5 border border-neutral-200 dark:border-slate-700 rounded-lg text-sm">15+ ans terrain commercial</span>
+                                <span class="px-3 py-1.5 border border-neutral-200 dark:border-slate-700 rounded-lg text-sm">IA & Automatisation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 text-sm font-mono text-neutral-500 dark:text-blue-400 mb-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                    sendMessage()
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Travaillons ensemble</h2>
+                <p class="text-neutral-600 dark:text-slate-400">Un projet ? Discutons-en.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <div class="card rounded-xl p-8">
+                        <h3 class="font-semibold text-lg mb-6">Contact</h3>
+                        <div class="space-y-6">
+                            <a href="/cdn-cgi/l/email-protection#5231332220123a3d263f333b3e7c3420" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-black dark:group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                                </div>
+                                <div><p class="text-sm text-neutral-500">Email</p><p class="font-medium"><span class="__cf_email__" data-cfemail="492a28393b0921263d24282025672f3b">[email&#160;protected]</span></p></div>
+                            </a>
+                            <a href="tel:+33666461363" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-black dark:group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                                </div>
+                                <div><p class="text-sm text-neutral-500">Téléphone</p><p class="font-medium">06 66 46 13 63</p></div>
+                            </a>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                                </div>
+                                <div><p class="text-sm text-neutral-500">Localisation</p><p class="font-medium">Sérifontaine, France</p></div>
+                            </div>
+                        </div>
+                        <hr class="my-6 border-neutral-200 dark:border-slate-700">
+                        <div class="flex gap-3">
+                            <a href="https://www.linkedin.com/in/celineharbane/" target="_blank" class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center hover:bg-black dark:hover:bg-blue-600 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            <a href="https://github.com" target="_blank" class="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-slate-800 flex items-center justify-center hover:bg-black dark:hover:bg-blue-600 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal" style="transition-delay:0.2s">
+                    <form class="card rounded-xl p-8 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Nom</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-black dark:focus:border-blue-500 focus:outline-none transition-colors" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-black dark:focus:border-blue-500 focus:outline-none transition-colors" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-black dark:focus:border-blue-500 focus:outline-none transition-colors resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-black dark:bg-blue-600 text-white font-medium rounded-lg hover:bg-neutral-800 dark:hover:bg-blue-500 transition-colors inline-flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+                            Envoyer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-neutral-200 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <a href="#hero" class="font-mono font-semibold">
+                    <span class="text-neutral-400 dark:text-blue-500">&lt;</span>Céline<span class="text-neutral-400 dark:text-blue-500">/&gt;</span>
+                </a>
+                <p class="text-sm text-neutral-400">© 2025 • Développeur Fullstack Freelance</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+        
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+        
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('border-neutral-200', window.scrollY > 50);
+            navbar.classList.toggle('dark:border-slate-800', window.scrollY > 50);
+        });
+        
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Form
+        document.querySelector('form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci ! Je vous réponds rapidement.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
